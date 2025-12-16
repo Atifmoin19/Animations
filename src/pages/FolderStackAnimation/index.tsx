@@ -172,8 +172,8 @@ const FolderStackAnimation = () => {
           x: x,
           y: y - 80,
           z: z,
-          rotateX: -24,
-          rotateY: -25,
+          rotateX: -22,
+          rotateY: -22,
           rotateZ: 10,
           opacity: opacity,
           // filter: filter,
@@ -272,7 +272,7 @@ const FolderStackAnimation = () => {
       >
         {Array.from({ length: itemsCount }).map((_, index) => (
           <Flex
-            p={"4rem 2rem"}
+            p={"2rem"}
             justifyContent={"center"}
             alignItems={"center"}
             key={index}
