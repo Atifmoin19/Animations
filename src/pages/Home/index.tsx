@@ -5,6 +5,7 @@ import elasticPhysics from "assets/spring.png";
 import layered from "assets/Layered.png";
 import clothReveal from "assets/ClothReveal.png";
 import fallingText from "assets/falling-text.png";
+import CardFlying from "assets/CardFlying.png";
 import particleShatter from "assets/PhysicsShatter.png";
 import folderStack from "assets/folder.png";
 import gsap from "gsap";
@@ -184,6 +185,16 @@ const HomePage = () => {
       link: "/cloth-reveal",
       image: clothReveal,
       title: "Cloth Reveal",
+    },
+    {
+      link: "/card-scroll-trigger",
+      image: folderStack,
+      title: "Scroll Fly",
+    },
+    {
+      link: "/card-scroll-trigger",
+      image: CardFlying,
+      title: "Scroll Fly",
     },
   ];
 
