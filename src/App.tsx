@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import CercularAnimation from "./pages/CercularAnimation/CercularAnimation";
 import DelayCercularAnimation from "./pages/DelayCercularAnimation";
 import FolderStackAnimation from "./pages/FolderStackAnimation";
-import HomePage from "./pages/Home";
+
 import LayeredInterface from "./pages/Test/Layered";
 import SpringBounce from "./pages/Test/ElasticPhysics";
 import PhysicsShatter from "./pages/Test/PhysicsShatter";
@@ -10,6 +10,7 @@ import FallingTextWrapper from "./pages/Test/FallingText";
 import ClothReveal from "./pages/Test/ClothsEffect";
 import Preloader from "./components/Preloader";
 import CardScrollTrigger from "./pages/Test/CardScrollTrigger";
+import HomePage from "./pages/Home/HomePage";
 
 function App() {
   return (
