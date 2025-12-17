@@ -3,12 +3,12 @@ import CercularAnimation from "./pages/CercularAnimation/CercularAnimation";
 import DelayCercularAnimation from "./pages/DelayCercularAnimation";
 import FolderStackAnimation from "./pages/FolderStackAnimation";
 import HomePage from "./pages/Home";
-import Test from "./pages/Test";
-import Test2 from "./pages/Test/index2";
-import Test3 from "./pages/Test/index3";
+import LayeredInterface from "./pages/Test";
+import SpringBounce from "./pages/Test/index2";
+import PhysicsShatter from "./pages/Test/index3";
+import FallingTextWrapper from "./pages/Test/index4";
+import ClothReveal from "./pages/Test/index5";
 import Preloader from "./components/Preloader";
-import Test4 from "./pages/Test/index4";
-import Test5 from "./pages/Test/index5";
 
 function App() {
   return (
@@ -24,11 +24,11 @@ function App() {
           path="/folder-stack-animation"
           element={<FolderStackAnimation />}
         />
-        <Route path="/test" element={<Test />} />
-        <Route path="/test2" element={<Test2 />} />
-        <Route path="/test3" element={<Test3 />} />
-        <Route path="/test4" element={<Test4 />} />
-        <Route path="/test5" element={<Test5 />} />
+        <Route path="/layered-interface" element={<LayeredInterface />} />
+        <Route path="/spring-bounce" element={<SpringBounce />} />
+        <Route path="/physics-shatter" element={<PhysicsShatter />} />
+        <Route path="/falling-text" element={<FallingTextWrapper />} />
+        <Route path="/cloth-reveal" element={<ClothReveal />} />
       </Routes>
     </Preloader>
   );

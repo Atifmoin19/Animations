@@ -1,8 +1,9 @@
 import { Button, Flex } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import gsap from "gsap";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
-const Test2 = () => {
+const SpringBounce = () => {
   const lineRef = useRef<SVGPathElement | null>(null);
   const ballRef = useRef<SVGCircleElement | null>(null);
 
@@ -69,31 +70,62 @@ const Test2 = () => {
   };
 
   return (
-    <Flex w="100%" h="100vh" bg="#000" align="center" justify="center">
-      <Button onClick={drop}>drop</Button>
+    <RoboticWrapper
+      title="ELASTIC PHYSICS"
+      description="Interactive spring dynamics with drop simulation."
+    >
       <Flex
-        w="600px"
-        h="400px"
+        w="100%"
+        h="100vh"
+        bg="transparent"
         align="center"
         justify="center"
-        cursor="pointer"
+        direction="column"
       >
-        <svg width="600" height="400">
-          {/* Spring line */}
-          <path
-            ref={lineRef}
-            d="M 50 200 Q 300 200 550 200"
-            fill="none"
-            stroke="white"
-            strokeWidth="4"
-          />
+        {/* Helper styled button */}
+        <Button
+          onClick={drop}
+          mb={8}
+          zIndex={20}
+          variant="outline"
+          color="#00f3ff"
+          borderColor="#00f3ff"
+          _hover={{ bg: "rgba(0, 243, 255, 0.1)" }}
+        >
+          Drop Ball
+        </Button>
+        <Flex
+          w="600px"
+          h="400px"
+          align="center"
+          justify="center"
+          cursor="pointer"
+        >
+          <svg width="600" height="400">
+            {/* Spring line */}
+            <path
+              ref={lineRef}
+              d="M 50 200 Q 300 200 550 200"
+              fill="none"
+              stroke="#00f3ff"
+              strokeWidth="4"
+              style={{ filter: "drop-shadow(0 0 5px #00f3ff)" }}
+            />
 
-          {/* Falling object */}
-          <circle ref={ballRef} cx="300" cy="20" r="12" fill="red" />
-        </svg>
+            {/* Falling object */}
+            <circle
+              ref={ballRef}
+              cx="300"
+              cy="20"
+              r="12"
+              fill="#ff0055"
+              style={{ filter: "drop-shadow(0 0 5px #ff0055)" }}
+            />
+          </svg>
+        </Flex>
       </Flex>
-    </Flex>
+    </RoboticWrapper>
   );
 };
 
-export default Test2;
+export default SpringBounce;

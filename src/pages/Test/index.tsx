@@ -1,8 +1,9 @@
 import { Flex, Box } from "@chakra-ui/react";
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
-const Test = () => {
+const LayeredInterface = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const layersRef = useRef<HTMLDivElement[]>([]);
 
@@ -94,62 +95,67 @@ const Test = () => {
   };
 
   return (
-    <Flex
-      w={"100%"}
-      h={"100vh"}
-      bg={"#000"}
-      direction={"column"}
-      justifyContent={"center"}
-      alignItems={"center"}
+    <RoboticWrapper
+      title="LAYERED INTERFACE"
+      description="Experimental multi-plane hover distortions."
     >
       <Flex
-        ref={containerRef}
-        w={"400px"}
-        h={"400px"}
-        rounded={"xl"}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        sx={{
-          perspective: "1000px", // Deep perspective
-          transformStyle: "preserve-3d",
-          cursor: "pointer",
-        }}
+        w={"100%"}
+        h={"100vh"}
+        bg={"transparent"}
+        direction={"column"}
         justifyContent={"center"}
         alignItems={"center"}
-        position="relative"
       >
-        {layers.map((i) => {
-          // Bottommost (i=0) -> Opacity 0.9
-          // Topmost (i=5) -> Opacity 0.2
-          // Map range [0, layerCount-1] to [0.9, 0.2]
-          const opacity = 0.8 - (i / (layerCount - 1)) * 0.7;
+        <Flex
+          ref={containerRef}
+          w={"400px"}
+          h={"400px"}
+          rounded={"xl"}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          sx={{
+            perspective: "1000px", // Deep perspective
+            transformStyle: "preserve-3d",
+            cursor: "pointer",
+          }}
+          justifyContent={"center"}
+          alignItems={"center"}
+          position="relative"
+        >
+          {layers.map((i) => {
+            // Bottommost (i=0) -> Opacity 0.9
+            // Topmost (i=5) -> Opacity 0.2
+            // Map range [0, layerCount-1] to [0.9, 0.2]
+            const opacity = 0.8 - (i / (layerCount - 1)) * 0.7;
 
-          return (
-            <Box
-              key={i}
-              ref={(el) => {
-                if (el) layersRef.current[i] = el;
-              }}
-              w={"300px"}
-              h={"300px"}
-              aspectRatio={"1/1"}
-              bg={`rgba(255, 255, 255, ${opacity})`}
-              rounded={"full"}
-              position="absolute"
-              sx={{
-                // Base rotation from user request: "rotate Z and Y and x"
-                // We apply this to the layers or the container?
-                // Creating a tilted base state for the 'water' look
-                transformStyle: "preserve-3d",
-                border: "1px solid rgba(255,255,255,0.1)",
-                boxShadow: "0 0 20px rgba(255,255,255,0.1)",
-              }}
-            />
-          );
-        })}
+            return (
+              <Box
+                key={i}
+                ref={(el) => {
+                  if (el) layersRef.current[i] = el;
+                }}
+                w={"300px"}
+                h={"300px"}
+                aspectRatio={"1/1"}
+                bg={`rgba(255, 255, 255, ${opacity})`}
+                rounded={"full"}
+                position="absolute"
+                sx={{
+                  // Base rotation from user request: "rotate Z and Y and x"
+                  // We apply this to the layers or the container?
+                  // Creating a tilted base state for the 'water' look
+                  transformStyle: "preserve-3d",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  boxShadow: "0 0 20px rgba(255,255,255,0.1)",
+                }}
+              />
+            );
+          })}
+        </Flex>
       </Flex>
-    </Flex>
+    </RoboticWrapper>
   );
 };
 
-export default Test;
+export default LayeredInterface;

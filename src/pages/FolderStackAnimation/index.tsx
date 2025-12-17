@@ -1,6 +1,7 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import gsap from "gsap";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
 const CursorTrail = () => {
   const linesRef = useRef<SVGLineElement[]>([]);
@@ -256,146 +257,157 @@ const FolderStackAnimation = () => {
   }, []);
 
   return (
-    <Box minH="100vh" w="full" bg="#050505" overflow="hidden" position="fixed">
-      <CursorTrail />
+    <RoboticWrapper
+      title="FOLDER STACK"
+      description="3D perspective scroll interaction with magnetic hover effects."
+    >
       <Box
-        ref={containerRef}
-        className="container"
-        w="100%"
-        h="100vh"
-        position="relative"
-        sx={{
-          perspective: "4000px", // Deep perspective
-          transformStyle: "preserve-3d",
-          pointerEvents: "none",
-        }}
+        minH="100vh"
+        w="full"
+        bg="transparent"
+        overflow="hidden"
+        position="fixed"
       >
-        {Array.from({ length: itemsCount }).map((_, index) => (
-          <Flex
-            p={"2rem"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            key={index}
-            ref={(el: HTMLDivElement | null) => {
-              itemsRef.current[index] = el;
-            }}
-            className="folder-item-wrapper"
-            position="absolute"
-            pointerEvents="auto"
-            top="50%"
-            w={"85%"}
-            left="50%"
-            // bg={"red"}
-            // Wrapper uses GSAP for positioning.
-            // Initial transform to center it before GSAP takes over
-            transform="translate(-50%, -50%) translateZ(-2000px)"
-            zIndex={0}
-            cursor="pointer"
-            role="group"
-            onMouseEnter={() => {
-              // Clear any existing timeout to ensure only the latest hover intent is tracked
-              if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-
-              hoverTimeout.current = setTimeout(() => {
-                hoveredIndex.current = index;
-                // activeMousePos reset removed to prevent center-jump
-              }, 100);
-            }}
-            onMouseMove={(e) => {
-              if (hoveredIndex.current === index) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                activeMousePos.current = { x, y };
-              }
-            }}
-            onMouseLeave={() => {
-              // If we leave before the timeout triggers, clear it so we don't hover
-              if (hoverTimeout.current) {
-                clearTimeout(hoverTimeout.current);
-                hoverTimeout.current = null;
-              }
-              hoveredIndex.current = null;
-              // activeMousePos reset removed
-            }}
-          >
-            {/* Visual Content Group: moves relative to Wrapper */}
-            <Box
-              w={`${cardWidth + 100}px`} // Dimensions of the hit area (matches card)
-              h={`${cardWidth}px`}
-              className="visual-content"
+        <CursorTrail />
+        <Box
+          ref={containerRef}
+          className="container"
+          w="100%"
+          h="100vh"
+          position="relative"
+          sx={{
+            perspective: "4000px", // Deep perspective
+            transformStyle: "preserve-3d",
+            pointerEvents: "none",
+          }}
+        >
+          {Array.from({ length: itemsCount }).map((_, index) => (
+            <Flex
+              p={"2rem"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              key={index}
               ref={(el: HTMLDivElement | null) => {
-                visualsRef.current[index] = el;
+                itemsRef.current[index] = el;
               }}
-              // w="100%"
-              // h="100%"
-              position="relative"
-              // transformStyle essential if we had 3D children,
-              // but here we just have flat card + label.
+              className="folder-item-wrapper"
+              position="absolute"
+              pointerEvents="auto"
+              top="50%"
+              w={"85%"}
+              left="50%"
+              // bg={"red"}
+              // Wrapper uses GSAP for positioning.
+              // Initial transform to center it before GSAP takes over
+              transform="translate(-50%, -50%) translateZ(-2000px)"
+              zIndex={0}
+              cursor="pointer"
+              role="group"
+              onMouseEnter={() => {
+                // Clear any existing timeout to ensure only the latest hover intent is tracked
+                if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+
+                hoverTimeout.current = setTimeout(() => {
+                  hoveredIndex.current = index;
+                  // activeMousePos reset removed to prevent center-jump
+                }, 100);
+              }}
+              onMouseMove={(e) => {
+                if (hoveredIndex.current === index) {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  activeMousePos.current = { x, y };
+                }
+              }}
+              onMouseLeave={() => {
+                // If we leave before the timeout triggers, clear it so we don't hover
+                if (hoverTimeout.current) {
+                  clearTimeout(hoverTimeout.current);
+                  hoverTimeout.current = null;
+                }
+                hoveredIndex.current = null;
+                // activeMousePos reset removed
+              }}
             >
+              {/* Visual Content Group: moves relative to Wrapper */}
               <Box
-                w="100%"
-                h="100%"
-                overflow="hidden"
-                rounded="sm"
-                // Glassy Border & Glow
-                boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 0 30px rgba(255, 255, 255, 0.1)"
-                border="1px solid rgba(255, 255, 255, 0.2)"
-                bg="#1a1a1a"
+                w={`${cardWidth + 100}px`} // Dimensions of the hit area (matches card)
+                h={`${cardWidth}px`}
+                className="visual-content"
+                ref={(el: HTMLDivElement | null) => {
+                  visualsRef.current[index] = el;
+                }}
+                // w="100%"
+                // h="100%"
                 position="relative"
+                // transformStyle essential if we had 3D children,
+                // but here we just have flat card + label.
               >
-                {/* Image */}
-                <Image
-                  src={`https://picsum.photos/id/${10 + index * 5}/800/600`}
-                  alt={`Project ${index}`}
+                <Box
                   w="100%"
                   h="100%"
-                  objectFit="cover"
-                  draggable={false}
-                  filter="brightness(0.9) contrast(1.2)"
-                />
-                {/* Stronger Glass Reflection Overlay */}
+                  overflow="hidden"
+                  rounded="sm"
+                  // Glassy Border & Glow
+                  boxShadow="0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 0 30px rgba(255, 255, 255, 0.1)"
+                  border="1px solid rgba(255, 255, 255, 0.2)"
+                  bg="#1a1a1a"
+                  position="relative"
+                >
+                  {/* Image */}
+                  <Image
+                    src={`https://picsum.photos/id/${10 + index * 5}/800/600`}
+                    alt={`Project ${index}`}
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    draggable={false}
+                    filter="brightness(0.9) contrast(1.2)"
+                  />
+                  {/* Stronger Glass Reflection Overlay */}
+                  <Box
+                    position="absolute"
+                    inset={0}
+                    bg="linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 50%, transparent 100%)"
+                    pointerEvents="none"
+                    mixBlendMode="overlay"
+                  />
+                </Box>
+                {/* Label moves with card */}
                 <Box
+                  ref={(el: HTMLDivElement | null) => {
+                    labelsRef.current[index] = el;
+                  }}
                   position="absolute"
-                  inset={0}
-                  bg="linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 50%, transparent 100%)"
+                  bottom="-50px"
+                  left="20px"
+                  color="white"
+                  mixBlendMode="difference"
                   pointerEvents="none"
-                  mixBlendMode="overlay"
-                />
-              </Box>
-              {/* Label moves with card */}
-              <Box
-                ref={(el: HTMLDivElement | null) => {
-                  labelsRef.current[index] = el;
-                }}
-                position="absolute"
-                bottom="-50px"
-                left="20px"
-                color="white"
-                mixBlendMode="difference"
-                pointerEvents="none"
-                opacity={0}
-                className="label"
-                sx={{
-                  ".folder-item-wrapper:hover &": {
-                    opacity: 1,
-                    // transform: "translateY(-10px)", // Removed to let GSAP handle position
-                    // transition: "all 0.3s", // Removed to prevent conflict
-                  },
-                }}
-              >
-                <Box fontWeight="bold" fontSize="lg">
-                  PROJECT {index + 1}
-                </Box>
-                <Box fontSize="sm" color="gray.400">
-                  Interaction Design
+                  opacity={0}
+                  className="label"
+                  sx={{
+                    ".folder-item-wrapper:hover &": {
+                      opacity: 1,
+                      // transform: "translateY(-10px)", // Removed to let GSAP handle position
+                      // transition: "all 0.3s", // Removed to prevent conflict
+                    },
+                  }}
+                >
+                  <Box fontWeight="bold" fontSize="lg">
+                    PROJECT {index + 1}
+                  </Box>
+                  <Box fontSize="sm" color="gray.400">
+                    Interaction Design
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          </Flex>
-        ))}
+            </Flex>
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </RoboticWrapper>
   );
 };
 

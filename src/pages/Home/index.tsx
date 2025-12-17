@@ -1,6 +1,11 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import circular from "assets/circular.png";
 import delayCircular from "assets/delayCircular.png";
+import elasticPhysics from "assets/spring.png";
+import layered from "assets/Layered.png";
+import clothReveal from "assets/ClothReveal.png";
+import fallingText from "assets/falling-text.png";
+import particleShatter from "assets/PhysicsShatter.png";
 import folderStack from "assets/folder.png";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
@@ -156,12 +161,30 @@ const HomePage = () => {
       title: "Folder Stack",
     },
     {
-      link: "/test",
-      image: folderStack,
-      title: "Test Zone",
+      link: "/layered-interface",
+      image: layered,
+      title: "Layered UI",
     },
-    // Cloning to make the cylinder fuller if needed, or just standard 4
-    // Let's stick to 4 for now and space them wide.
+    {
+      link: "/spring-bounce",
+      image: elasticPhysics,
+      title: "Spring Physics",
+    },
+    {
+      link: "/physics-shatter",
+      image: particleShatter,
+      title: "Shatter",
+    },
+    {
+      link: "/falling-text",
+      image: fallingText,
+      title: "Kinetic Type",
+    },
+    {
+      link: "/cloth-reveal",
+      image: clothReveal,
+      title: "Cloth Reveal",
+    },
   ];
 
   // Config

@@ -1,6 +1,7 @@
 import { Flex, Box, Text } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
 interface KeyboardKeyProps {
   char: string;
@@ -235,7 +236,7 @@ const FallingText = ({ text, trigger }: { text: string; trigger: boolean }) => {
   );
 };
 
-const Test4 = () => {
+const FallingTextWrapper = () => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -256,37 +257,42 @@ const Test4 = () => {
   }, []);
 
   return (
-    <Flex
-      w="100vw"
-      h="100vh"
-      align="center"
-      justify="center"
-      bg={"black"}
-      transition="background-color 0.5s ease"
-      position="relative"
+    <RoboticWrapper
+      title="KINETIC TYPOGRAPHY"
+      description="Gravity-driven text elements with physics interactions."
     >
-      <Box w="80vw" h="80vh">
-        {/* Text Component */}
-        {/* We pass !loading as trigger. When not loading (progress 100), physics starts. */}
-        <FallingText text="Welcome to my site" trigger={!loading} />
-      </Box>
+      <Flex
+        w="100vw"
+        h="100vh"
+        align="center"
+        justify="center"
+        bg={"transparent"}
+        transition="background-color 0.5s ease"
+        position="relative"
+      >
+        <Box w="80vw" h="80vh">
+          {/* Text Component */}
+          {/* We pass !loading as trigger. When not loading (progress 100), physics starts. */}
+          <FallingText text="Welcome to my site" trigger={!loading} />
+        </Box>
 
-      {/* Loader Counter */}
-      {loading && (
-        <Text
-          position="absolute"
-          bottom="50px"
-          left="50px"
-          color="white"
-          fontSize="6xl"
-          fontWeight="bold"
-          fontFamily="monospace"
-        >
-          {progress}
-        </Text>
-      )}
-    </Flex>
+        {/* Loader Counter */}
+        {loading && (
+          <Text
+            position="absolute"
+            bottom="50px"
+            left="50px"
+            color="white"
+            fontSize="6xl"
+            fontWeight="bold"
+            fontFamily="monospace"
+          >
+            {progress}
+          </Text>
+        )}
+      </Flex>
+    </RoboticWrapper>
   );
 };
 
-export default Test4;
+export default FallingTextWrapper;

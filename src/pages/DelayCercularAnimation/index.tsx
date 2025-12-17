@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { CustomEase, Flip } from "gsap/all";
 import { useLayoutEffect, useRef } from "react";
 import "../../index.css";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
 // Register GSAP plugins
 gsap.registerPlugin(CustomEase, Flip);
@@ -167,65 +168,77 @@ const DelayCercularAnimation = () => {
   }, []);
 
   return (
-    <Flex minH="100vh" w="full" align="center" justify="center" bg="beige">
-      <Box
-        ref={containerRef}
-        className="container"
-        w="100%"
-        h="100vh"
-        position="relative"
-        overflow="hidden"
+    <RoboticWrapper
+      title="DELAYED EXPANSION"
+      description="Sequential transition from linear stacking to radial layout with custom easing."
+    >
+      <Flex
+        minH="100vh"
+        w="full"
+        align="center"
+        justify="center"
+        bg="transparent"
       >
-        <Box ref={galleryRef} w="100%" h="100%" className="gallery">
-          {/* Render items using React map instead of manual DOM creation */}
-          {Array.from({ length: itemsCount }).map((_, index) => (
-            <Box
-              key={index}
-              className="item"
-              position="absolute"
-              top="150%" // Initial position off-screen
-              w="175px"
-              h="250px"
-            >
-              <Image
-                rounded={"2xl"}
-                shadow={"md"}
-                bg={"#b0b0b0"}
-                src={`https://picsum.photos/id/${100 + index + 1}/200/300`}
-                alt={`Image ${index + 1}`}
-                w="100%"
-                h="100%"
-                objectFit="cover"
-                loading="eager"
-              />
-            </Box>
-          ))}
-        </Box>
-
         <Box
-          className="loader"
-          position="absolute"
-          bottom="15%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          w="40px"
-          textAlign="center"
-          clipPath="polygon(0 0,100% 0,100% 100%,0 100%)"
+          ref={containerRef}
+          className="container"
+          w="100%"
+          h="100vh"
+          position="relative"
+          overflow="hidden"
         >
-          <Text
-            ref={counterRef}
-            position="relative"
-            display="flex"
-            justifyContent="center"
-            transform="translateY(20px)"
-            fontWeight="bold"
-            fontSize="xl"
+          <Box ref={galleryRef} w="100%" h="100%" className="gallery">
+            {/* Render items using React map instead of manual DOM creation */}
+            {Array.from({ length: itemsCount }).map((_, index) => (
+              <Box
+                key={index}
+                className="item"
+                position="absolute"
+                top="150%" // Initial position off-screen
+                w="175px"
+                h="250px"
+              >
+                <Image
+                  rounded={"2xl"}
+                  shadow={"md"}
+                  bg={"#b0b0b0"}
+                  src={`https://picsum.photos/id/${100 + index + 1}/200/300`}
+                  alt={`Image ${index + 1}`}
+                  w="100%"
+                  h="100%"
+                  objectFit="cover"
+                  loading="eager"
+                />
+              </Box>
+            ))}
+          </Box>
+
+          <Box
+            className="loader"
+            position="absolute"
+            bottom="15%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            w="40px"
+            textAlign="center"
+            clipPath="polygon(0 0,100% 0,100% 100%,0 100%)"
           >
-            0
-          </Text>
+            <Text
+              ref={counterRef}
+              position="relative"
+              display="flex"
+              justifyContent="center"
+              transform="translateY(20px)"
+              fontWeight="bold"
+              fontSize="xl"
+              color="white" // Ensure text is visible on dark bg
+            >
+              0
+            </Text>
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </RoboticWrapper>
   );
 };
 

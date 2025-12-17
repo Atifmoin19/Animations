@@ -1,6 +1,7 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
 export default function CercularAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -130,40 +131,51 @@ export default function CercularAnimation() {
   }, []);
 
   return (
-    <Flex minH="100vh" w="full" align="center" justify="center" bg="#fff">
-      <Box
-        className="container"
-        ref={containerRef}
+    <RoboticWrapper
+      title="CIRCULAR GALLERY"
+      description="A dynamic circular distribution of interactive image nodes."
+    >
+      <Flex
+        minH="100vh"
         w="full"
-        h="100vh"
-        position="relative"
-        overflow="hidden"
+        align="center"
+        justify="center"
+        bg="transparent"
       >
-        <Box className="gallery">
-          {new Array(16).fill(0).map((_, index) => (
-            <Box
-              key={index}
-              className="item"
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="none"
-              w="70px"
-              h="100px"
-              bg="#b0b0b0"
-              m="10px"
-            >
-              <Image
-                src={`https://picsum.photos/id/${100 + index}/200/300`}
-                w="100%"
-                h="100%"
-                objectFit="cover"
-                pointerEvents="none" // Prevent image stealing clicks
-              />
-            </Box>
-          ))}
+        <Box
+          className="container"
+          ref={containerRef}
+          w="full"
+          h="100vh"
+          position="relative"
+          overflow="hidden"
+        >
+          <Box className="gallery">
+            {new Array(16).fill(0).map((_, index) => (
+              <Box
+                key={index}
+                className="item"
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="none"
+                w="70px"
+                h="100px"
+                bg="#b0b0b0"
+                m="10px"
+              >
+                <Image
+                  src={`https://picsum.photos/id/${100 + index}/200/300`}
+                  w="100%"
+                  h="100%"
+                  objectFit="cover"
+                  pointerEvents="none" // Prevent image stealing clicks
+                />
+              </Box>
+            ))}
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </RoboticWrapper>
   );
 }

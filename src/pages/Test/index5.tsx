@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
 // --- Cloth Simulation Constants ---
 const CLOTH_COLS = 20;
@@ -255,7 +256,7 @@ const ClothOverlay = ({
   );
 };
 
-const Test5 = () => {
+const ClothReveal = () => {
   const [loading, setLoading] = useState(true);
   const [showOverlay, setShowOverlay] = useState(true);
   const [count, setCount] = useState(0);
@@ -278,56 +279,64 @@ const Test5 = () => {
   };
 
   return (
-    <Flex
-      w="100vw"
-      h="100vh"
-      position="relative"
-      bg="white"
-      align="center"
-      justify="center"
-      overflow="hidden"
+    <RoboticWrapper
+      title="CLOTH PHYSICS"
+      description="Soft body simulation overlay with gravity reveal."
     >
-      {/* 2. Main Page Content (Revealed) */}
-      <Box zIndex={1} textAlign="center">
-        <Text fontSize="6xl" fontWeight="bold" color="black">
-          Hey Welcome
-        </Text>
-      </Box>
-
-      {/* 1. Black Box / Cloth Overlay */}
-      {showOverlay && (
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          w="100%"
-          h="100%"
-          zIndex={20}
-          pointerEvents="none"
-        >
-          <ClothOverlay trigger={!loading} onFinish={handleFinish} />
-
-          {/* Loader Text on top of the Cloth */}
-          {loading && (
-            <Flex
-              position="absolute"
-              top={0}
-              left={0}
-              w="100%"
-              h="100%"
-              align="center"
-              justify="center"
-              zIndex={30}
-            >
-              <Text color="white" fontSize="9xl" fontWeight="bold">
-                {count}%
-              </Text>
-            </Flex>
-          )}
+      <Flex
+        w="100%"
+        h="100vh"
+        position="relative"
+        bg="transparent" // Dark theme from wrapper
+        align="center"
+        justify="center"
+        overflow="hidden"
+      >
+        {/* 2. Main Page Content (Revealed) */}
+        <Box zIndex={1} textAlign="center">
+          <Text fontSize="6xl" fontWeight="bold" color="white">
+            System Online
+          </Text>
+          <Text fontSize="xl" color="rgba(255,255,255,0.7)" mt={4}>
+            Visual diagnostics complete.
+          </Text>
         </Box>
-      )}
-    </Flex>
+
+        {/* 1. Black Box / Cloth Overlay */}
+        {showOverlay && (
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            w="100%"
+            h="100%"
+            zIndex={20}
+            pointerEvents="none"
+          >
+            <ClothOverlay trigger={!loading} onFinish={handleFinish} />
+
+            {/* Loader Text on top of the Cloth */}
+            {loading && (
+              <Flex
+                position="absolute"
+                top={0}
+                left={0}
+                w="100%"
+                h="100%"
+                align="center"
+                justify="center"
+                zIndex={30}
+              >
+                <Text color="white" fontSize="9xl" fontWeight="bold">
+                  {count}%
+                </Text>
+              </Flex>
+            )}
+          </Box>
+        )}
+      </Flex>
+    </RoboticWrapper>
   );
 };
 
-export default Test5;
+export default ClothReveal;

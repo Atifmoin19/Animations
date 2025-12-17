@@ -1,6 +1,7 @@
 import { Flex, Text, Box } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
+import RoboticWrapper from "../../components/RoboticWrapper";
 
 // Helper to generate 3D-looking ball texture
 const createGradTexture = (radius: number, color: string) => {
@@ -42,7 +43,7 @@ const createGradTexture = (radius: number, color: string) => {
   return canvas.toDataURL();
 };
 
-const Test3 = () => {
+const PhysicsShatter = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [percent, setPercent] = useState(0);
   const engineRef = useRef<Matter.Engine | null>(null);
@@ -280,34 +281,45 @@ const Test3 = () => {
   }, []);
 
   return (
-    <Box position="relative" w="100%" h="100vh" bg="black" overflow="hidden">
-      <div
-        ref={sceneRef}
-        style={{ position: "absolute", inset: 0, zIndex: 1 }}
-      />
-      <Flex
-        position="absolute"
-        top="0"
-        left="0"
+    <RoboticWrapper
+      title="PARTICLE SHATTER"
+      description="Physics-based filling with interactive destruction."
+    >
+      <Box
+        position="relative"
         w="100%"
-        h="100%"
-        align="center"
-        justify="center"
-        zIndex={2}
-        pointerEvents="none"
+        h="100vh"
+        bg="transparent"
+        overflow="hidden"
       >
-        <Text
-          fontSize="9xl"
-          fontWeight="bold"
-          color="white"
-          textShadow="0 0 20px rgba(0,0,0,0.5)"
-          mixBlendMode="difference"
+        <div
+          ref={sceneRef}
+          style={{ position: "absolute", inset: 0, zIndex: 1 }}
+        />
+        <Flex
+          position="absolute"
+          top="0"
+          left="0"
+          w="100%"
+          h="100%"
+          align="center"
+          justify="center"
+          zIndex={2}
+          pointerEvents="none"
         >
-          {percent}%
-        </Text>
-      </Flex>
-    </Box>
+          <Text
+            fontSize="9xl"
+            fontWeight="bold"
+            color="white"
+            textShadow="0 0 20px rgba(0,0,0,0.5)"
+            mixBlendMode="difference"
+          >
+            {percent}%
+          </Text>
+        </Flex>
+      </Box>
+    </RoboticWrapper>
   );
 };
 
-export default Test3;
+export default PhysicsShatter;
